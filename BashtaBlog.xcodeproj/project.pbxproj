@@ -382,7 +382,7 @@
 				DEVELOPMENT_TEAM = 478EAG46F6;
 				INFOPLIST_FILE = BashtaBlog/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Andrey-Bashta.BashtaBlog";
+				PRODUCT_BUNDLE_IDENTIFIER = andreybashta.BashtaBlog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -398,7 +398,7 @@
 				DEVELOPMENT_TEAM = 478EAG46F6;
 				INFOPLIST_FILE = BashtaBlog/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Andrey-Bashta.BashtaBlog";
+				PRODUCT_BUNDLE_IDENTIFIER = andreybashta.BashtaBlog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
