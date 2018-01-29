@@ -10,7 +10,6 @@ import UIKit
 import Alamofire
 import Unbox
 
-
 class ViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
@@ -46,7 +45,7 @@ class ViewController: UIViewController {
                 //TODO: can handle some errors?
                 return
             }
-            
+
             let post: PostData? = try? unbox(data: data)
             print(post)
         }
