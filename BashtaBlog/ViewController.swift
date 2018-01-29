@@ -10,19 +10,19 @@ import UIKit
 import Alamofire
 import Unbox
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+class ViewController: UIViewController {
+    
     @IBOutlet weak var tableView: UITableView!
     
     var posts = [PostData]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableView.delegate = self
         tableView.dataSource = self
         
         downloadPosts{}
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -40,11 +40,31 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func downloadPosts(completed: @escaping DownloadComplete) {
-        Alamofire.request(BLOG_URL + POSTS).responseData { data in
-            let post: PostData = try unbox(data: response.result.value)
-//            print(post)
+        Alamofire.request(BLOG_URL + POSTS).responseData { dataWrapper in
+            guard let data = dataWrapper.data else {
+                //TODO: can handle some errors?
+                return
+            }
+            
+            let post: PostData? = try? unbox(data: data)
+            print(post)
         }
+        
     }
+    
+}
+
+extension ViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let post = posts[indexPath.row]
+        performSegue(withIdentifier: "ShowPost", sender: post)
+        self.tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+}
+
+extension ViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -52,12 +72,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return posts.count
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let post = posts[indexPath.row]
-        performSegue(withIdentifier: "ShowPost", sender: post)
-        self.tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -73,5 +87,4 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             return ViewControllerCell()
         }
     }
-
 }
