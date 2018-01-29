@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		AB1B0DFF201F606B009F7701 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1B0DFE201F606B009F7701 /* AppDelegate.swift */; };
-		AB1B0E01201F606B009F7701 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1B0E00201F606B009F7701 /* ViewController.swift */; };
 		AB1B0E04201F606B009F7701 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB1B0E02201F606B009F7701 /* Main.storyboard */; };
 		AB1B0E06201F606B009F7701 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB1B0E05201F606B009F7701 /* Assets.xcassets */; };
 		AB1B0E09201F606B009F7701 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB1B0E07201F606B009F7701 /* LaunchScreen.storyboard */; };
@@ -17,6 +16,7 @@
 		AB1B0E15201F6746009F7701 /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1B0E14201F6746009F7701 /* PostData.swift */; };
 		AB1B0E17201F6761009F7701 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1B0E16201F6761009F7701 /* Constants.swift */; };
 		AB1B0E19201F86D5009F7701 /* MarkData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1B0E18201F86D5009F7701 /* MarkData.swift */; };
+		ABBCA4D5201FCF1C00F8E99D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBCA4D4201FCF1C00F8E99D /* ViewController.swift */; };
 		B8311811532D4DA20A947B58 /* Pods_BashtaBlog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A13DD23AC34081700892DD2F /* Pods_BashtaBlog.framework */; };
 /* End PBXBuildFile section */
 
@@ -26,7 +26,6 @@
 		A13DD23AC34081700892DD2F /* Pods_BashtaBlog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BashtaBlog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB1B0DFB201F606B009F7701 /* BashtaBlog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BashtaBlog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB1B0DFE201F606B009F7701 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		AB1B0E00201F606B009F7701 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		AB1B0E03201F606B009F7701 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AB1B0E05201F606B009F7701 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AB1B0E08201F606B009F7701 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -36,6 +35,7 @@
 		AB1B0E14201F6746009F7701 /* PostData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostData.swift; sourceTree = "<group>"; };
 		AB1B0E16201F6761009F7701 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		AB1B0E18201F86D5009F7701 /* MarkData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkData.swift; sourceTree = "<group>"; };
+		ABBCA4D4201FCF1C00F8E99D /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,7 +90,7 @@
 			children = (
 				AB1B0DFE201F606B009F7701 /* AppDelegate.swift */,
 				AB1B0E12201F672D009F7701 /* ViewControllerCell.swift */,
-				AB1B0E00201F606B009F7701 /* ViewController.swift */,
+				ABBCA4D4201FCF1C00F8E99D /* ViewController.swift */,
 				AB1B0E10201F66F1009F7701 /* SecondViewController.swift */,
 				AB1B0E14201F6746009F7701 /* PostData.swift */,
 				AB1B0E18201F86D5009F7701 /* MarkData.swift */,
@@ -236,9 +236,9 @@
 			files = (
 				AB1B0E11201F66F1009F7701 /* SecondViewController.swift in Sources */,
 				AB1B0E13201F672D009F7701 /* ViewControllerCell.swift in Sources */,
-				AB1B0E01201F606B009F7701 /* ViewController.swift in Sources */,
 				AB1B0E19201F86D5009F7701 /* MarkData.swift in Sources */,
 				AB1B0E15201F6746009F7701 /* PostData.swift in Sources */,
+				ABBCA4D5201FCF1C00F8E99D /* ViewController.swift in Sources */,
 				AB1B0DFF201F606B009F7701 /* AppDelegate.swift in Sources */,
 				AB1B0E17201F6761009F7701 /* Constants.swift in Sources */,
 			);

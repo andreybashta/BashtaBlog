@@ -10,7 +10,7 @@ import Foundation
 
 struct MarkData {
     
-    let markID: Int!
-    let name: String!
+    let markID: Int
+    let name: String
     
 }
