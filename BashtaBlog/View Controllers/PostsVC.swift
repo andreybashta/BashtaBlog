@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import Unbox
 
-class ViewController: UIViewController {
+class PostsVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -31,7 +31,7 @@ class ViewController: UIViewController {
         navigationItem.backBarButtonItem = backItem
         
         if segue.identifier == "ShowPost" {
-            if let destination = segue.destination as? SecondViewController {
+            if let destination = segue.destination as? PostDetailsVC {
                 if let post = sender as? PostData {
                     destination.post = post
                 }
@@ -57,7 +57,7 @@ class ViewController: UIViewController {
     
 }
 
-extension ViewController: UITableViewDelegate {
+extension PostsVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let post = posts[indexPath.row]
@@ -67,7 +67,7 @@ extension ViewController: UITableViewDelegate {
     
 }
 
-extension ViewController: UITableViewDataSource {
+extension PostsVC: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -79,7 +79,7 @@ extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? ViewControllerCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? PostCell {
             
             let post = posts[indexPath.row]
             cell.ConfigureCell(post: post)
@@ -87,7 +87,7 @@ extension ViewController: UITableViewDataSource {
             return cell
             
         } else {
-            return ViewControllerCell()
+            return PostCell()
         }
     }
 }

@@ -8,9 +8,8 @@
 
 import UIKit
 
-class ViewControllerCell: UITableViewCell {
+class PostCell: UITableViewCell {
 
-    
     @IBOutlet weak var postTitleLabel: UILabel!
     @IBOutlet weak var postTextLabel: UILabel!
     @IBOutlet weak var postDateLabel: UILabel!

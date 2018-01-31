@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class SecondViewController: UIViewController {
+class PostDetailsVC: UIViewController {
 
     var post: PostData!
     

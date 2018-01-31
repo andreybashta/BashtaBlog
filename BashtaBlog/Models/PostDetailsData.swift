@@ -8,9 +8,14 @@
 
 import Foundation
 
-struct MarkData {
+
+struct PostDetailsData {
     
-    let markID: Int
-    let name: String
-    
+    struct MarkData {
+        
+        let markID: Int
+        let name: String
+        
+    }
+
 }
