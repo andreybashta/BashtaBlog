@@ -10,6 +10,7 @@ import Foundation
 
 protocol PostsView {
     
-    func downloadPosts(completed: @escaping DownloadComplete)
+    func addPosts(posts: [PostData]?)
+    func getPosts()
     
 }

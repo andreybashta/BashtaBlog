@@ -12,4 +12,19 @@ class PostPresenter {
     
     private var postView: PostsView?
     
+    func attachView(view: PostsView) {
+        postView = view
+    }
+    
+    func detachView() {
+        postView = nil
+    }
+    
+    func getPosts() {
+        APIManager.sharedInstance.downloadPosts(completionHandler: { (posts) in
+            self.postView?.addPosts(posts: posts)
+        })
+    }
+    
+    init() { }
 }

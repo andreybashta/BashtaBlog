@@ -14,6 +14,7 @@ class PostsVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    private var presenter = PostPresenter()
     var posts = [PostData]()
     
     override func viewDidLoad() {
@@ -22,7 +23,10 @@ class PostsVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        downloadPosts{}
+        presenter.attachView(view: self)
+        presenter.getPosts()
+        
+//        downloadPosts{}
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -39,23 +43,39 @@ class PostsVC: UIViewController {
         }
     }
     
-    func downloadPosts(completed: @escaping DownloadComplete) {
-        Alamofire.request(BLOG_URL + POSTS, method: .get).responseData { response in
-            
-            guard let data = response.data else {
-                let error = checkErrorCode(response.response!.statusCode)
-                print(error)
-                return
-            }
-            
-            let posts: [PostData]? = try? unbox(data: data)
-            self.posts = posts!
-            self.tableView.reloadData()
-            
+//    func downloadPosts(completed: @escaping DownloadComplete) {
+//        Alamofire.request(BLOG_URL + POSTS, method: .get).responseData { response in
+//
+//            guard let data = response.data else {
+//                let error = checkErrorCode(response.response!.statusCode)
+//                print(error)
+//                return
+//            }
+//
+//            let posts: [PostData]? = try? unbox(data: data)
+//            self.posts = posts!
+//            self.tableView.reloadData()
+//
+//        }
+//    }
+    
+}
+
+extension PostsVC: PostsView {
+    
+    func addPosts(posts: [PostData]?) {
+        for post in posts! {
+            self.posts.append(post)
         }
+        tableView.reloadData()
+    }
+    
+    func getPosts() {
+        presenter.getPosts()
     }
     
 }
+
 
 extension PostsVC: UITableViewDelegate {
     
