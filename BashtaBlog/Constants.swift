@@ -8,6 +8,11 @@
 
 import Foundation
 
+typealias DownloadComplete = () -> ()
+
+let BLOG_URL = "http://fed-blog.herokuapp.com/api"
+let POSTS = "/v1/posts/"
+
 public enum HTTPMethod: String {
     case get     = "GET"
     case post    = "POST"
@@ -15,7 +20,24 @@ public enum HTTPMethod: String {
     case delete  = "DELETE"
 }
 
-let BLOG_URL = "http://fed-blog.herokuapp.com/api"
-let POSTS = "/v1/posts/"
+public enum APIError: Error {
+    case unauthorized
+    case forbidden
+    case unkownError
+    case notFound
+}
 
-typealias DownloadComplete = () -> ()
+public func checkErrorCode(_ errorCode: Int) -> APIError {
+    switch errorCode {
+    case 401:
+        return .unauthorized
+    case 403:
+        return .forbidden
+    case 404:
+        return .notFound
+    default:
+        return .unkownError
+    }
+}
+
+

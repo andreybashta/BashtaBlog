@@ -40,19 +40,19 @@ class ViewController: UIViewController {
     }
     
     func downloadPosts(completed: @escaping DownloadComplete) {
-        Alamofire.request(BLOG_URL + POSTS, method: .get).responseData { dataWrapper in
-            guard let data = dataWrapper.data else {
-                //TODO: can handle some errors?
-                
+        Alamofire.request(BLOG_URL + POSTS, method: .get).responseData { response in
+            
+            guard let data = response.data else {
+                let error = checkErrorCode(response.response!.statusCode)
+                print(error)
                 return
             }
-
+            
             let posts: [PostData]? = try? unbox(data: data)
             self.posts = posts!
             self.tableView.reloadData()
-
+            
         }
-        
     }
     
 }
