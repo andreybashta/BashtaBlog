@@ -25,6 +25,5 @@ class PostPresenter {
             self.postView?.addPosts(posts: posts)
         })
     }
-    
-    init() { }
+
 }

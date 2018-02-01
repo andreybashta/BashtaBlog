@@ -16,6 +16,8 @@ class APIManager {
     
     let BLOG_URL = "http://fed-blog.herokuapp.com/api"
     let POSTS = "/v1/posts/"
+    let MARKS = "/v1/marks/"
+    let COMMENTS = "/v1/comments/"
     
     struct Static {
         static var instance: APIManager?
@@ -65,6 +67,42 @@ class APIManager {
                 let data = response.data
                 if let posts: [PostData]? = try? unbox(data: data!) {
                     completionHandler(posts)
+                }
+                break
+            case .failure:
+                let error = self.checkErrorCode(response.response!.statusCode)
+                print(error)
+                break
+            }
+        }
+    }
+    
+    func downloadMarks(completionHandler: @escaping (_ marks: [MarkData]?) -> Void) {
+        Alamofire.request(APIManager.sharedInstance.BLOG_URL + MARKS, method: .get).responseData { response in
+            
+            switch response.result {
+            case .success:
+                let data = response.data
+                if let marks: [MarkData]? = try? unbox(data: data!) {
+                    completionHandler(marks)
+                }
+                break
+            case .failure:
+                let error = self.checkErrorCode(response.response!.statusCode)
+                print(error)
+                break
+            }
+        }
+    }
+    
+    func downloadComments(completionHandler: @escaping (_ comments: [CommentData]?) -> Void) {
+        Alamofire.request(APIManager.sharedInstance.BLOG_URL + COMMENTS, method: .get).responseData { response in
+            
+            switch response.result {
+            case .success:
+                let data = response.data
+                if let comments: [CommentData]? = try? unbox(data: data!) {
+                    completionHandler(comments)
                 }
                 break
             case .failure:
