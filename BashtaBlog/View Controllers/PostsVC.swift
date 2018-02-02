@@ -22,9 +22,11 @@ class PostsVC: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-        
         presenter.attachView(view: self)
-        presenter.getPosts()
+        
+        DispatchQueue.main.async {
+            self.presenter.getPosts()
+        }
         
     }
     

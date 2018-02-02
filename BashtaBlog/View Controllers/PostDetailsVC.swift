@@ -12,7 +12,6 @@ import Alamofire
 class PostDetailsVC: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    
     @IBOutlet weak var postContentView: PostContentView!
     
     var post: PostData?
@@ -21,23 +20,27 @@ class PostDetailsVC: UIViewController {
     
     private var presenter = PostDetailsPresenter()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.delegate = self
         tableView.dataSource = self
-        
         presenter.attachView(view: self)
         
-        presenter.getCommentsByPostID(post: self.post!)
-        
-        presenter.getMarksByPostID(post: self.post!)
-        
-        postContentView.ConfigureCell(post: self.post!)
+        DispatchQueue.main.async {
+            self.presenter.getCommentsByPostID(post: self.post!)
+            self.presenter.getMarksByPostID(post: self.post!)
+        }
+
+        postContentView.ConfigureCell(post: post!)
+        postContentView.setScrollViewItems(marks: marks)
+        postContentView.setScrollSize(marks: marks)
         
     }
     
 }
+
 
 extension PostDetailsVC: PostsDetailsView {
     
