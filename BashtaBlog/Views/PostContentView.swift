@@ -20,5 +20,4 @@ class PostContentView: UIView {
         postDateLabel.text = post.datePublic
     }
     
-    
 }

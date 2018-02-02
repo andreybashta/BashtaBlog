@@ -19,9 +19,8 @@
 		AB527D98202258C800822613 /* PostPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB527D97202258C800822613 /* PostPresenter.swift */; };
 		AB982B6C2023D5CD00CE7072 /* AddCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB982B6B2023D5CD00CE7072 /* AddCommentView.swift */; };
 		ABBCA4D5201FCF1C00F8E99D /* PostsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBCA4D4201FCF1C00F8E99D /* PostsVC.swift */; };
-		ABD42A572023AB530075E9E5 /* PostMarksCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD42A562023AB530075E9E5 /* PostMarksCell.swift */; };
 		ABD42A592023AB7A0075E9E5 /* PostContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD42A582023AB7A0075E9E5 /* PostContentView.swift */; };
-		ABD42A5B2023AB8F0075E9E5 /* PostCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD42A5A2023AB8F0075E9E5 /* PostCommentCell.swift */; };
+		ABD42A5B2023AB8F0075E9E5 /* PostCommentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD42A5A2023AB8F0075E9E5 /* PostCommentsCell.swift */; };
 		ABD42A5F2023ABEA0075E9E5 /* MarkData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD42A5E2023ABE90075E9E5 /* MarkData.swift */; };
 		ABD42A612023ABFF0075E9E5 /* CommentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD42A602023ABFF0075E9E5 /* CommentData.swift */; };
 		ABD42A632023BFDD0075E9E5 /* PostDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD42A622023BFDC0075E9E5 /* PostDetailsPresenter.swift */; };
@@ -48,9 +47,8 @@
 		AB527D97202258C800822613 /* PostPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPresenter.swift; sourceTree = "<group>"; };
 		AB982B6B2023D5CD00CE7072 /* AddCommentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCommentView.swift; sourceTree = "<group>"; };
 		ABBCA4D4201FCF1C00F8E99D /* PostsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostsVC.swift; sourceTree = "<group>"; };
-		ABD42A562023AB530075E9E5 /* PostMarksCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostMarksCell.swift; sourceTree = "<group>"; };
 		ABD42A582023AB7A0075E9E5 /* PostContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostContentView.swift; sourceTree = "<group>"; };
-		ABD42A5A2023AB8F0075E9E5 /* PostCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommentCell.swift; sourceTree = "<group>"; };
+		ABD42A5A2023AB8F0075E9E5 /* PostCommentsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommentsCell.swift; sourceTree = "<group>"; };
 		ABD42A5E2023ABE90075E9E5 /* MarkData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkData.swift; sourceTree = "<group>"; };
 		ABD42A602023ABFF0075E9E5 /* CommentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentData.swift; sourceTree = "<group>"; };
 		ABD42A622023BFDC0075E9E5 /* PostDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailsPresenter.swift; sourceTree = "<group>"; };
@@ -165,8 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				AB1B0E12201F672D009F7701 /* PostCell.swift */,
-				ABD42A562023AB530075E9E5 /* PostMarksCell.swift */,
-				ABD42A5A2023AB8F0075E9E5 /* PostCommentCell.swift */,
+				ABD42A5A2023AB8F0075E9E5 /* PostCommentsCell.swift */,
 				ABD42A662023C9440075E9E5 /* EmptyCell.swift */,
 			);
 			path = TableViewCells;
@@ -325,8 +322,7 @@
 				AB1B0DFF201F606B009F7701 /* AppDelegate.swift in Sources */,
 				AB982B6C2023D5CD00CE7072 /* AddCommentView.swift in Sources */,
 				ABD42A5F2023ABEA0075E9E5 /* MarkData.swift in Sources */,
-				ABD42A5B2023AB8F0075E9E5 /* PostCommentCell.swift in Sources */,
-				ABD42A572023AB530075E9E5 /* PostMarksCell.swift in Sources */,
+				ABD42A5B2023AB8F0075E9E5 /* PostCommentsCell.swift in Sources */,
 				ABD42A652023BFF30075E9E5 /* PostsDetailsView.swift in Sources */,
 				AB1B0E17201F6761009F7701 /* APIManager.swift in Sources */,
 			);

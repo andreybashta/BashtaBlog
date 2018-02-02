@@ -13,8 +13,9 @@ class PostDetailsVC: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var post: PostData?
+    @IBOutlet weak var postContentView: PostContentView!
     
+    var post: PostData?
     var marks = [MarkData]()
     var comments = [CommentData]()
     
@@ -27,13 +28,35 @@ class PostDetailsVC: UIViewController {
         tableView.dataSource = self
         
         presenter.attachView(view: self)
-        presenter.getComments()
+        
+        presenter.getCommentsByPostID(post: self.post!)
+        
+        presenter.getMarksByPostID(post: self.post!)
+        
+        postContentView.ConfigureCell(post: self.post!)
+        
     }
     
 }
 
 extension PostDetailsVC: PostsDetailsView {
     
+    func addMarks(marks: [MarkData]?) {
+        for mark in marks! {
+            self.marks.append(mark)
+        }
+        tableView.reloadData()
+    }
+    
+    func getMarks() {
+        presenter.getMarks()
+    }
+    
+    func getMarksByPostID(post: PostData?) {
+        presenter.getMarksByPostID(post: self.post)
+    }
+    
+
     func addComments(comments: [CommentData]?) {
         for comment in comments! {
             self.comments.append(comment)
@@ -45,19 +68,8 @@ extension PostDetailsVC: PostsDetailsView {
         presenter.getComments()
     }
     
-    func addMarks(marks: [MarkData]?) {
-        for mark in marks! {
-            self.marks.append(mark)
-        }
-        tableView.reloadData()
-    }
-    
-    func addPostContent() {
-        
-    }
-    
-    func getMarks() {
-        presenter.getMarks()
+    func getCommentsByPostID(post: PostData?) {
+        presenter.getCommentsByPostID(post: self.post)
     }
     
 }
@@ -78,7 +90,7 @@ extension PostDetailsVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        if let commentCell = tableView.dequeueReusableCell(withIdentifier: "PostCommentCell", for: indexPath) as? PostCommentCell {
+        if let commentCell = tableView.dequeueReusableCell(withIdentifier: "PostCommentCell", for: indexPath) as? PostCommentsCell {
             
             let comment = comments[indexPath.row]
             commentCell.ConfigureCell(comment: comment)
@@ -86,7 +98,7 @@ extension PostDetailsVC: UITableViewDataSource {
             return commentCell
             
         } else {
-            return PostCommentCell()
+            return PostCommentsCell()
         }
         
     }

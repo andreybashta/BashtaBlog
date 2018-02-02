@@ -10,14 +10,12 @@ import Foundation
 import Alamofire
 import Unbox
 
-typealias DownloadComplete = () -> ()
-
 class APIManager {
     
-    let BLOG_URL = "http://fed-blog.herokuapp.com/api"
-    let POSTS = "/v1/posts/"
-    let MARKS = "/v1/marks/"
-    let COMMENTS = "/v1/comments/"
+    let BLOG_URL = "http://fed-blog.herokuapp.com/api/v1"
+    let POSTS = "/posts"
+    let MARKS = "/marks"
+    let COMMENTS = "/comments"
     
     struct Static {
         static var instance: APIManager?
@@ -113,6 +111,48 @@ class APIManager {
         }
     }
     
+    func downloadCommentsByPostID(post: PostData?, completionHandler: @escaping (_ comments: [CommentData]?) -> Void) {
+        
+        let POST_ID = "/\(String(describing: post!.postID))/"
+        
+        Alamofire.request(APIManager.sharedInstance.BLOG_URL + COMMENTS + POSTS + POST_ID, method: .get).responseData { response in
+            
+            switch response.result {
+            case .success:
+                let data = response.data
+                if let comments: [CommentData]? = try? unbox(data: data!) {
+                    completionHandler(comments)
+                }
+                break
+            case .failure:
+                let error = self.checkErrorCode(response.response!.statusCode)
+                print(error)
+                break
+            }
+        }
+        
+    }
+    
+    func downloadMarksByPostID(post: PostData?, completionHandler: @escaping (_ marks: [MarkData]?) -> Void) {
+        
+        let POST_ID = "/\(String(describing: post!.postID))"
+        
+        Alamofire.request(APIManager.sharedInstance.BLOG_URL + POSTS + POST_ID + MARKS, method: .get).responseData { response in
+            
+            switch response.result {
+            case .success:
+                let data = response.data
+                if let marks: [MarkData]? = try? unbox(data: data!) {
+                    completionHandler(marks)
+                }
+                break
+            case .failure:
+                let error = self.checkErrorCode(response.response!.statusCode)
+                print(error)
+                break
+            }
+        }
+        
+    }
+    
 }
-
-

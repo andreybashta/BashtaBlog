@@ -60,7 +60,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="07M-VO-FJR">
-                                                    <rect key="frame" x="15" y="62" width="26.5" height="14.5"/>
+                                                    <rect key="frame" x="15" y="62" width="27" height="15"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -166,19 +166,24 @@
                                         <constraint firstItem="D9u-go-e8j" firstAttribute="leading" secondItem="7aq-g7-9ba" secondAttribute="leading" constant="15" id="wVE-Np-WM1"/>
                                         <constraint firstItem="D9u-go-e8j" firstAttribute="top" secondItem="Qry-Vu-pfp" secondAttribute="bottom" constant="5" id="wnF-uy-PqP"/>
                                     </constraints>
+                                    <connections>
+                                        <outlet property="postDateLabel" destination="iMt-Xx-kzg" id="Upx-0f-xgk"/>
+                                        <outlet property="postTextLabel" destination="D9u-go-e8j" id="bMH-FF-5WO"/>
+                                        <outlet property="postTitleLabel" destination="Qry-Vu-pfp" id="2xX-id-asn"/>
+                                    </connections>
                                 </view>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="Yqe-xV-f2I" userLabel="Footer" customClass="AddCommentView" customModule="BashtaBlog" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="239" width="320" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your comment" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UnU-Mt-i30">
-                                            <rect key="frame" x="15" y="7" width="115" height="30"/>
+                                        <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your comment" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UnU-Mt-i30">
+                                            <rect key="frame" x="15" y="7" width="250" height="30"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MFA-d8-nJS">
-                                            <rect key="frame" x="140" y="7" width="30" height="30"/>
+                                            <rect key="frame" x="275" y="7" width="30" height="30"/>
                                             <state key="normal" title="Add"/>
                                             <connections>
                                                 <action selector="addComment:" destination="Yqe-xV-f2I" eventType="touchUpInside" id="2L4-UT-UY0"/>
@@ -192,7 +197,7 @@
                                         <constraint firstItem="UnU-Mt-i30" firstAttribute="top" secondItem="Yqe-xV-f2I" secondAttribute="top" constant="7" id="fpm-fY-cC6"/>
                                         <constraint firstItem="UnU-Mt-i30" firstAttribute="leading" secondItem="Yqe-xV-f2I" secondAttribute="leading" constant="15" id="l41-0s-Q4J"/>
                                         <constraint firstItem="MFA-d8-nJS" firstAttribute="leading" secondItem="UnU-Mt-i30" secondAttribute="trailing" constant="10" id="uTN-zf-PiI"/>
-                                        <constraint firstAttribute="trailing" secondItem="MFA-d8-nJS" secondAttribute="trailing" constant="150" id="yVg-3N-qy2"/>
+                                        <constraint firstAttribute="trailing" secondItem="MFA-d8-nJS" secondAttribute="trailing" constant="15" id="yVg-3N-qy2"/>
                                         <constraint firstAttribute="bottom" secondItem="MFA-d8-nJS" secondAttribute="bottom" constant="7" id="zOF-YP-EmD"/>
                                     </constraints>
                                     <connections>
@@ -200,7 +205,7 @@
                                     </connections>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="PostCommentCell" rowHeight="87" id="Gyk-I5-4bD" customClass="PostCommentCell" customModule="BashtaBlog" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="PostCommentCell" rowHeight="87" id="Gyk-I5-4bD" customClass="PostCommentsCell" customModule="BashtaBlog" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="152" width="320" height="87"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Gyk-I5-4bD" id="qYs-xv-lWy">
@@ -258,6 +263,7 @@
                         <viewLayoutGuide key="safeArea" id="5bM-UB-mIm"/>
                     </view>
                     <connections>
+                        <outlet property="postContentView" destination="7aq-g7-9ba" id="G1n-CN-vLK"/>
                         <outlet property="tableView" destination="T7V-z4-H2P" id="l3m-OJ-HFg"/>
                     </connections>
                 </viewController>
@@ -332,14 +338,9 @@
                             <constraint firstItem="Wyw-ik-M95" firstAttribute="leading" secondItem="o1o-HN-Wvg" secondAttribute="leading" constant="15" id="wPu-Nj-oa7"/>
                         </constraints>
                     </tableViewCellContentView>
-                    <connections>
-                        <outlet property="postDateLabel" destination="iMt-Xx-kzg" id="9Nz-2C-OOs"/>
-                        <outlet property="postTextLabel" destination="D9u-go-e8j" id="opC-T9-jvS"/>
-                        <outlet property="postTitleLabel" destination="Qry-Vu-pfp" id="hUw-5M-TbD"/>
-                    </connections>
                 </tableViewCell>
             </objects>
-            <point key="canvasLocation" x="920.625" y="133.09859154929578"/>
+            <point key="canvasLocation" x="920" y="133"/>
         </scene>
     </scenes>
 </document>

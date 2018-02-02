@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PostCommentCell: UITableViewCell {
+class PostCommentsCell: UITableViewCell {
 
     @IBOutlet weak var commentTextLabel: UILabel!
     @IBOutlet weak var commentAuthorLabel: UILabel!
