@@ -16,6 +16,7 @@ class APIManager {
     let POSTS = "/posts"
     let MARKS = "/marks"
     let COMMENTS = "/comments"
+    let SECURITY = "/security"
     
     struct Static {
         static var instance: APIManager?

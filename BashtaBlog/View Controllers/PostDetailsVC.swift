@@ -61,9 +61,7 @@ extension PostDetailsVC: PostsDetailsView {
     
 
     func addComments(comments: [CommentData]?) {
-        for comment in comments! {
-            self.comments.append(comment)
-        }
+        self.comments = comments!
         tableView.reloadData()
     }
     
