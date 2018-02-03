@@ -14,7 +14,7 @@ class PostCommentsCell: UITableViewCell {
     @IBOutlet weak var commentAuthorLabel: UILabel!
     @IBOutlet weak var commentDateLabel: UILabel!
     
-    func ConfigureCell(comment: CommentData) {
+    func сonfigureCell(comment: CommentData) {
         commentTextLabel.text = comment.text
         commentAuthorLabel.text = comment.author
         commentDateLabel.text = comment.datePublic

@@ -34,8 +34,6 @@ class PostDetailsVC: UIViewController {
         }
 
         postContentView.ConfigureCell(post: post!)
-        postContentView.setScrollViewItems(marks: marks)
-        postContentView.setScrollSize(marks: marks)
         
     }
     
@@ -45,14 +43,12 @@ class PostDetailsVC: UIViewController {
 extension PostDetailsVC: PostsDetailsView {
     
     func addMarks(marks: [MarkData]?) {
-        for mark in marks! {
-            self.marks.append(mark)
-        }
-        tableView.reloadData()
-    }
-    
-    func getMarks() {
-        presenter.getMarks()
+        guard let marks = marks else { return }
+        
+        self.marks = marks
+        
+        postContentView.setScrollViewItems(marks: marks)
+        postContentView.setScrollSize(marks: marks)
     }
     
     func getMarksByPostID(post: PostData?) {
@@ -65,10 +61,6 @@ extension PostDetailsVC: PostsDetailsView {
             self.comments.append(comment)
         }
         tableView.reloadData()
-    }
-    
-    func getComments() {
-        presenter.getComments()
     }
     
     func getCommentsByPostID(post: PostData?) {
@@ -96,7 +88,7 @@ extension PostDetailsVC: UITableViewDataSource {
         if let commentCell = tableView.dequeueReusableCell(withIdentifier: "PostCommentCell", for: indexPath) as? PostCommentsCell {
             
             let comment = comments[indexPath.row]
-            commentCell.ConfigureCell(comment: comment)
+            commentCell.сonfigureCell(comment: comment)
             
             return commentCell
             

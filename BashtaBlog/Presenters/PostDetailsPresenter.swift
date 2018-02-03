@@ -20,12 +20,6 @@ class PostDetailsPresenter {
         postDetailsView = nil
     }
     
-    func getMarks() {
-        APIManager.sharedInstance.downloadMarks(completionHandler: { (marks) in
-            self.postDetailsView?.addMarks(marks: marks)
-        })
-    }
-    
     func getMarksByPostID(post: PostData?) {
         APIManager.sharedInstance.downloadMarksByPostID(post: post, completionHandler: { (marks) in
             self.postDetailsView?.addMarks(marks: marks)
