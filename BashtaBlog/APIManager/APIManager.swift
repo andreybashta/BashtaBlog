@@ -64,7 +64,7 @@ class APIManager {
             switch response.result {
             case .success:
                 let data = response.data
-                if let posts: [PostData]? = try? unbox(data: data!) {
+                if let posts: [PostData] = try? unbox(data: data!) {
                     completionHandler(posts)
                 }
                 break
@@ -82,7 +82,7 @@ class APIManager {
             switch response.result {
             case .success:
                 let data = response.data
-                if let marks: [MarkData]? = try? unbox(data: data!) {
+                if let marks: [MarkData] = try? unbox(data: data!) {
                     completionHandler(marks)
                 }
                 break
@@ -100,7 +100,7 @@ class APIManager {
             switch response.result {
             case .success:
                 let data = response.data
-                if let comments: [CommentData]? = try? unbox(data: data!) {
+                if let comments: [CommentData] = try? unbox(data: data!) {
                     completionHandler(comments)
                 }
                 break
@@ -121,7 +121,7 @@ class APIManager {
             switch response.result {
             case .success:
                 let data = response.data
-                if let comments: [CommentData]? = try? unbox(data: data!) {
+                if let comments: [CommentData] = try? unbox(data: data!) {
                     completionHandler(comments)
                 }
                 break
@@ -143,7 +143,7 @@ class APIManager {
             switch response.result {
             case .success:
                 let data = response.data
-                if let marks: [MarkData]? = try? unbox(data: data!) {
+                if let marks: [MarkData] = try? unbox(data: data!) {
                     completionHandler(marks)
                 }
                 break

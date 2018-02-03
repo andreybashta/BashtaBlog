@@ -11,11 +11,9 @@ import Foundation
 protocol PostsDetailsView {
     
     func addMarks(marks: [MarkData]?)
-    func getMarks()
     func getMarksByPostID(post: PostData?)
     
     func addComments(comments: [CommentData]?)
-    func getComments()
     func getCommentsByPostID(post: PostData?)
 
 }
