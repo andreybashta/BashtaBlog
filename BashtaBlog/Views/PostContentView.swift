@@ -27,11 +27,17 @@ class PostContentView: UIView {
     }
     
     func setScrollViewItems(marks: [MarkData]) {
+        
+        var currentX: CGFloat = -100
+        
         for i in marks{
-            let label = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: marksScrollView.bounds.height))
+            
+            let label = UILabel(frame: CGRect(x: currentX + 100, y: 0, width: 100, height: marksScrollView.bounds.height))
             label.text = i.name
             marksScrollView.addSubview(label)
+            currentX += 100
         }
+        
     }
     
 }

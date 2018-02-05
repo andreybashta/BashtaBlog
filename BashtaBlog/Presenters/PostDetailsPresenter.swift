@@ -25,12 +25,6 @@ class PostDetailsPresenter {
             self.postDetailsView?.addMarks(marks: marks)
         })
     }
-
-    func getComments() {
-        APIManager.sharedInstance.downloadComments(completionHandler: { (comments) in
-            self.postDetailsView?.addComments(comments: comments)
-        })
-    }
     
     func getCommentsByPostID(post: PostData?) {
         APIManager.sharedInstance.downloadCommentsByPostID(post: post, completionHandler: { (comments) in

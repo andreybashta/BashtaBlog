@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class LoginViewController: UIViewController {
     
@@ -14,25 +15,40 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     
+    private var presenter = AuthorizePresener()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-    }
-
-    @IBAction func login(_ sender: Any) {
-        
-        performSegue(withIdentifier: "ShowPostList", sender: nil)
-        
-//        let username = usernameField.text
-//        let password = passwordField.text
-//
-//        guard (username == "" || password == "") else { return }
-//        doLogin(username!, password!)
-        
+        presenter.attachView(view: self)
     }
     
-    func doLogin(_ username: String, _ password: String) {
-        
+    override func viewDidAppear(_ animated: Bool) {
+        presenter.detachView()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowPostsList" {
+            if let destination = segue.destination as? UINavigationController {
+                destination.popToRootViewController(animated: true)
+            }
+        }
+    }
+
+    @IBAction func loginUser(_ sender: Any) {
+        loginUser()
+        performSegue(withIdentifier: "ShowPostsList", sender: nil)
+    }
+    
+}
+
+extension LoginViewController: AuthorizeView {
+    
+    func loginUser() {
+        presenter.loginUser()
+    }
+    
+    func logoutUser() {
+        presenter.logoutUser()
     }
     
 }

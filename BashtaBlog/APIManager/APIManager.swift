@@ -31,13 +31,6 @@ class APIManager {
         return Static.instance!
     }
     
-    public enum HTTPMethod: String {
-        case get     = "GET"
-        case post    = "POST"
-        case put     = "PUT"
-        case delete  = "DELETE"
-    }
-    
     public enum APIError: Error {
         case unauthorized
         case forbidden
@@ -153,7 +146,32 @@ class APIManager {
                 break
             }
         }
-        
     }
     
+    func doLogin() {
+        
+        let headers: HTTPHeaders = [
+            "Accept": "*/*"
+        ]
+        
+        let parameters: Parameters = [
+            "name": "dogma",
+            "password": "123123"
+        ]
+        
+        Alamofire.request("http://fed-blog.herokuapp.com/api/v1/security/login", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseString { response in
+            
+            if let headerFields = response.response?.allHeaderFields as? [String: String], let URL = response.request?.url {
+                let cookies = HTTPCookie.cookies(withResponseHeaderFields: headerFields, for: URL)
+                print(cookies)
+                UserDefaults.standard.set(String(describing: cookies), forKey: "session")
+            }
+        }
+    }
+    
+    func doLogout() {
+        UserDefaults.standard.removeObject(forKey: "session")
+        print("Cache is removed")
+    }
+
 }

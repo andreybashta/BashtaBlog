@@ -13,8 +13,11 @@ import Unbox
 class PostsVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var authorizeButton: UIButton!
     
     private var presenter = PostPresenter()
+    private var authorizePresenter = AuthorizePresener()
+    
     var posts = [PostData]()
     
     override func viewDidLoad() {
@@ -23,6 +26,7 @@ class PostsVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         presenter.attachView(view: self)
+        authorizePresenter.attachView(view: self)
         
         DispatchQueue.main.async {
             self.presenter.getPosts()
@@ -44,7 +48,25 @@ class PostsVC: UIViewController {
         }
     }
     
+    @IBAction func logoutUser(_ sender: Any) {
+        logoutUser()
+        print("Button pressed")
+    }
+    
 }
+
+extension PostsVC: AuthorizeView {
+    
+    func loginUser() {
+        authorizePresenter.loginUser()
+    }
+    
+    func logoutUser() {
+        authorizePresenter.logoutUser()
+    }
+    
+}
+
 
 extension PostsVC: PostsView {
     
@@ -60,7 +82,6 @@ extension PostsVC: PostsView {
     }
     
 }
-
 
 extension PostsVC: UITableViewDelegate {
     

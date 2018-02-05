@@ -39,7 +39,6 @@ class PostDetailsVC: UIViewController {
     
 }
 
-
 extension PostDetailsVC: PostsDetailsView {
     
     func addMarks(marks: [MarkData]?) {
