@@ -17,6 +17,8 @@ class APIManager {
     let MARKS = "/marks"
     let COMMENTS = "/comments"
     let SECURITY = "/security"
+    let LOGIN = "/login"
+    let LOGOUT = "/logout"
     
     struct Static {
         static var instance: APIManager?
@@ -159,19 +161,46 @@ class APIManager {
             "password": "123123"
         ]
         
-        Alamofire.request("http://fed-blog.herokuapp.com/api/v1/security/login", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseString { response in
+        Alamofire.request(APIManager.sharedInstance.BLOG_URL + SECURITY + LOGIN, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseString { response in
             
             if let headerFields = response.response?.allHeaderFields as? [String: String], let URL = response.request?.url {
                 let cookies = HTTPCookie.cookies(withResponseHeaderFields: headerFields, for: URL)
-                print(cookies)
                 UserDefaults.standard.set(String(describing: cookies), forKey: "session")
             }
         }
     }
     
+    
     func doLogout() {
-        UserDefaults.standard.removeObject(forKey: "session")
-        print("Cache is removed")
+        Alamofire.request(APIManager.sharedInstance.BLOG_URL + SECURITY + LOGOUT, method: .get).responseString { response in
+            switch response.result {
+            case .success:
+                UserDefaults.standard.removeObject(forKey: "session")
+                break
+            case .failure:
+                let error = self.checkErrorCode(response.response!.statusCode)
+                print(error)
+                break
+            }
+        }
     }
 
+    func uploadComment(post: PostData?, comment: CommentData?) {
+        
+        let headers: HTTPHeaders = [
+            "Accept": UserDefaults.standard.string(forKey: "session")!
+        ]
+        
+        let parameters: Parameters = [
+            "text": String(describing: comment!.text),
+            "idPost": String(describing: post!.postID),
+            "idUser": "191"
+        ]
+        
+        Alamofire.request(APIManager.sharedInstance.BLOG_URL + COMMENTS, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseString { response in
+            debugPrint(response)
+        }
+        
+    }
+    
 }

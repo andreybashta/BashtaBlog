@@ -22,7 +22,7 @@ class PostPresenter {
     
     func getPosts() {
         APIManager.sharedInstance.downloadPosts(completionHandler: { (posts) in
-            self.postView?.addPosts(posts: posts)
+            self.postView?.appendPosts(posts: posts)
         })
     }
 

@@ -13,13 +13,14 @@ class PostDetailsVC: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var postContentView: PostContentView!
+    @IBOutlet weak var addCommentView: AddCommentView!
+    
     
     var post: PostData?
     var marks = [MarkData]()
     var comments = [CommentData]()
     
     private var presenter = PostDetailsPresenter()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,11 +38,24 @@ class PostDetailsVC: UIViewController {
         
     }
     
+    @IBAction func addComment(_ sender: Any) {
+        
+        let comment = CommentData(commentID: 0, text: addCommentView.commentTextField.text!, datePublic: "2018", author: "dogma")
+        comments.append(comment)
+        tableView.reloadData()
+        setComment(post: self.post, comment: comment)
+        
+    }
+    
 }
 
 extension PostDetailsVC: PostsDetailsView {
     
-    func addMarks(marks: [MarkData]?) {
+    func setComment(post: PostData?, comment: CommentData?) {
+        presenter.setComment(post: post, comment: comment)
+    }
+    
+    func appendMarks(marks: [MarkData]?) {
         guard let marks = marks else { return }
         
         self.marks = marks
@@ -55,7 +69,7 @@ extension PostDetailsVC: PostsDetailsView {
     }
     
 
-    func addComments(comments: [CommentData]?) {
+    func appendComments(comments: [CommentData]?) {
         self.comments = comments!
         tableView.reloadData()
     }

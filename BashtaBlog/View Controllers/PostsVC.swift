@@ -50,7 +50,6 @@ class PostsVC: UIViewController {
     
     @IBAction func logoutUser(_ sender: Any) {
         logoutUser()
-        print("Button pressed")
     }
     
 }
@@ -67,10 +66,9 @@ extension PostsVC: AuthorizeView {
     
 }
 
-
 extension PostsVC: PostsView {
     
-    func addPosts(posts: [PostData]?) {
+    func appendPosts(posts: [PostData]?) {
         for post in posts! {
             self.posts.append(post)
         }
@@ -116,4 +114,5 @@ extension PostsVC: UITableViewDataSource {
             return PostCell()
         }
     }
+    
 }

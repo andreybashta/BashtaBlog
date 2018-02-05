@@ -10,7 +10,7 @@ import Foundation
 
 protocol PostsView {
     
-    func addPosts(posts: [PostData]?)
+    func appendPosts(posts: [PostData]?)
     func getPosts()
     
 }

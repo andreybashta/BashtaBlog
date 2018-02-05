@@ -22,10 +22,6 @@ class LoginViewController: UIViewController {
         presenter.attachView(view: self)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        presenter.detachView()
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowPostsList" {
             if let destination = segue.destination as? UINavigationController {

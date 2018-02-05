@@ -22,14 +22,18 @@ class PostDetailsPresenter {
     
     func getMarksByPostID(post: PostData?) {
         APIManager.sharedInstance.downloadMarksByPostID(post: post, completionHandler: { (marks) in
-            self.postDetailsView?.addMarks(marks: marks)
+            self.postDetailsView?.appendMarks(marks: marks)
         })
     }
     
     func getCommentsByPostID(post: PostData?) {
         APIManager.sharedInstance.downloadCommentsByPostID(post: post, completionHandler: { (comments) in
-            self.postDetailsView?.addComments(comments: comments)
+            self.postDetailsView?.appendComments(comments: comments)
         })
     }
-
+    
+    func setComment(post: PostData?, comment: CommentData?) {
+        APIManager.sharedInstance.uploadComment(post: post, comment: comment)
+    }
+    
 }

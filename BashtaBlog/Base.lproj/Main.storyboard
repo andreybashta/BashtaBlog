@@ -249,7 +249,7 @@
                                     <rect key="frame" x="0.0" y="239" width="320" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your comment" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UnU-Mt-i30">
+                                        <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Новий комент" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UnU-Mt-i30">
                                             <rect key="frame" x="15" y="7" width="250" height="30"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -260,6 +260,7 @@
                                             <state key="normal" title="Add"/>
                                             <connections>
                                                 <action selector="addComment:" destination="Yqe-xV-f2I" eventType="touchUpInside" id="2L4-UT-UY0"/>
+                                                <action selector="addComment:" destination="MeZ-VF-4Lj" eventType="touchUpInside" id="xEo-2n-BGR"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -336,6 +337,7 @@
                         <viewLayoutGuide key="safeArea" id="5bM-UB-mIm"/>
                     </view>
                     <connections>
+                        <outlet property="addCommentView" destination="Yqe-xV-f2I" id="ZH1-3N-gnf"/>
                         <outlet property="postContentView" destination="7aq-g7-9ba" id="G1n-CN-vLK"/>
                         <outlet property="tableView" destination="T7V-z4-H2P" id="l3m-OJ-HFg"/>
                     </connections>

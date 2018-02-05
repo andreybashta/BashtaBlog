@@ -161,8 +161,6 @@
 				AB325234202897E50009587A /* AuthorizeView.swift */,
 				AB527D95202258BC00822613 /* PostsView.swift */,
 				ABD42A642023BFF30075E9E5 /* PostsDetailsView.swift */,
-				ABD42A582023AB7A0075E9E5 /* PostContentView.swift */,
-				AB982B6B2023D5CD00CE7072 /* AddCommentView.swift */,
 				AB527D99202258DA00822613 /* TableViewCells */,
 			);
 			path = Views;
@@ -173,6 +171,8 @@
 			children = (
 				AB1B0E12201F672D009F7701 /* PostCell.swift */,
 				ABD42A5A2023AB8F0075E9E5 /* PostCommentsCell.swift */,
+				ABD42A582023AB7A0075E9E5 /* PostContentView.swift */,
+				AB982B6B2023D5CD00CE7072 /* AddCommentView.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
