@@ -33,13 +33,6 @@ class APIManager {
         return Static.instance!
     }
     
-    public enum APIError: Error {
-        case unauthorized
-        case forbidden
-        case unkownError
-        case notFound
-    }
-    
     func downloadPosts(completionHandler: @escaping (_ posts: [PostData]?) -> Void) {
         Alamofire.request(APIManager.sharedInstance.BLOG_URL + POSTS, method: .get).responseData { response in
             
@@ -48,38 +41,6 @@ class APIManager {
                 let data = response.data
                 if let posts: [PostData] = try? unbox(data: data!) {
                     completionHandler(posts)
-                }
-                debugPrint(response)
-            case .failure:
-                debugPrint(response)
-            }
-        }
-    }
-    
-    func downloadMarks(completionHandler: @escaping (_ marks: [MarkData]?) -> Void) {
-        Alamofire.request(APIManager.sharedInstance.BLOG_URL + MARKS, method: .get).responseData { response in
-            
-            switch response.result {
-            case .success:
-                let data = response.data
-                if let marks: [MarkData] = try? unbox(data: data!) {
-                    completionHandler(marks)
-                }
-                debugPrint(response)
-            case .failure:
-                debugPrint(response)
-            }
-        }
-    }
-    
-    func downloadComments(completionHandler: @escaping (_ comments: [CommentData]?) -> Void) {
-        Alamofire.request(APIManager.sharedInstance.BLOG_URL + COMMENTS, method: .get).responseData { response in
-            
-            switch response.result {
-            case .success:
-                let data = response.data
-                if let comments: [CommentData] = try? unbox(data: data!) {
-                    completionHandler(comments)
                 }
                 debugPrint(response)
             case .failure:
@@ -130,7 +91,7 @@ class APIManager {
     func uploadComment(post: PostData?, comment: CommentData?, completionHandler: @escaping (_ comment: CommentData?) -> Void) {
         
         guard let comment = comment, let post = post else {
-            print("CREATING COMMENT FOR UPLOAD FAILED")
+            print("COMMENT UPLOADING FAILED")
             return
         }
         
