@@ -16,7 +16,7 @@ class PostContentView: UIView {
     
     @IBOutlet weak var marksScrollView: UIScrollView!
     
-    func ConfigureCell(post: PostData) {
+    func configureCell(post: PostData) {
         postTitleLabel.text = post.title
         postTextLabel.text = post.text
         postDateLabel.text = post.datePublic

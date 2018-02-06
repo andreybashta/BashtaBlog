@@ -34,17 +34,16 @@ class PostDetailsVC: UIViewController {
             self.presenter.getMarksByPostID(post: self.post!)
         }
 
-        postContentView.ConfigureCell(post: post!)
+        postContentView.configureCell(post: post!)
         
     }
     
     @IBAction func addComment(_ sender: Any) {
+        guard let commentText = addCommentView.commentTextField.text,
+            !commentText.isEmpty else {return}
         
-        let comment = CommentData(commentID: 0, text: addCommentView.commentTextField.text!, datePublic: "2018", author: "dogma")
-        comments.append(comment)
-        tableView.reloadData()
+        let comment = CommentData(commentID: 0, text: commentText, datePublic: "2018", author: "dogma")
         setComment(post: self.post, comment: comment)
-        
     }
     
 }
@@ -60,8 +59,12 @@ extension PostDetailsVC: PostsDetailsView {
         
         self.marks = marks
         
-        postContentView.setScrollViewItems(marks: marks)
-        postContentView.setScrollSize(marks: marks)
+        if marks.count == 0 {
+            postContentView.isHidden = true
+        } else {
+            postContentView.setScrollViewItems(marks: marks)
+            postContentView.setScrollSize(marks: marks)
+        }
     }
     
     func getMarksByPostID(post: PostData?) {
