@@ -31,16 +31,19 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func loginUser(_ sender: Any) {
-        loginUser()
+        
+        loginUser(username: usernameField.text!, password: passwordField.text!)
         performSegue(withIdentifier: "ShowPostsList", sender: nil)
+        
     }
     
 }
 
 extension LoginViewController: AuthorizeView {
     
-    func loginUser() {
-        presenter.loginUser()
+    
+    func loginUser(username: String, password: String) {
+        presenter.loginUser(username: username, password: password)
     }
     
     func logoutUser() {

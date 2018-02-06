@@ -113,11 +113,11 @@
 			isa = PBXGroup;
 			children = (
 				AB1B0DFE201F606B009F7701 /* AppDelegate.swift */,
+				AB527D91202257B300822613 /* APIManager */,
 				AB527D9A202258E700822613 /* Presenters */,
 				AB527D94202257D900822613 /* Views */,
 				AB527D93202257C500822613 /* View Controllers */,
 				AB527D92202257BB00822613 /* Models */,
-				AB527D91202257B300822613 /* APIManager */,
 				AB1B0E05201F606B009F7701 /* Assets.xcassets */,
 				AB1B0E02201F606B009F7701 /* Main.storyboard */,
 				AB1B0E07201F606B009F7701 /* LaunchScreen.storyboard */,
@@ -170,8 +170,8 @@
 			isa = PBXGroup;
 			children = (
 				AB1B0E12201F672D009F7701 /* PostCell.swift */,
-				ABD42A5A2023AB8F0075E9E5 /* PostCommentsCell.swift */,
 				ABD42A582023AB7A0075E9E5 /* PostContentView.swift */,
+				ABD42A5A2023AB8F0075E9E5 /* PostCommentsCell.swift */,
 				AB982B6B2023D5CD00CE7072 /* AddCommentView.swift */,
 			);
 			path = TableViewCells;

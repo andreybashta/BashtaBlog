@@ -33,7 +33,9 @@ class PostDetailsPresenter {
     }
     
     func setComment(post: PostData?, comment: CommentData?) {
-        APIManager.sharedInstance.uploadComment(post: post, comment: comment)
+        APIManager.sharedInstance.uploadComment(post: post, comment: comment, completionHandler: { (comment) in
+            self.postDetailsView?.appendComment(comment: comment)
+        })
     }
     
 }

@@ -12,7 +12,4 @@ class AddCommentView: UIView {
 
     @IBOutlet weak var commentTextField: UITextField!
     
-    @IBAction func addComment(_ sender: Any) {
-    }
-    
 }

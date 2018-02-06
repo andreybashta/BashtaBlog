@@ -10,7 +10,7 @@ import Foundation
 
 protocol AuthorizeView {
     
-    func loginUser()
+    func loginUser(username: String, password: String)
     func logoutUser()
     
 }

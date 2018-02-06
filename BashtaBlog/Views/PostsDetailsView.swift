@@ -16,6 +16,7 @@ protocol PostsDetailsView {
     func appendComments(comments: [CommentData]?)
     func getCommentsByPostID(post: PostData?)
     
+    func appendComment(comment: CommentData?)
     func setComment(post: PostData?, comment: CommentData?)
 
 }

@@ -12,6 +12,9 @@ class AuthorizePresener {
     
     private var authorizeView: AuthorizeView?
     
+    var username: String?
+    var password: String?
+    
     func attachView(view: AuthorizeView) {
         authorizeView = view
     }
@@ -20,8 +23,11 @@ class AuthorizePresener {
         authorizeView = nil
     }
     
-    func loginUser() {
-        APIManager.sharedInstance.doLogin()
+    func loginUser(username: String, password: String) {
+        self.username = username
+        self.password = password
+        
+        APIManager.sharedInstance.doLogin(username: self.username!, password: self.password!)
     }
     
     func logoutUser() {

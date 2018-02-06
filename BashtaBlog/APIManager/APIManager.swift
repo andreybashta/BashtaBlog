@@ -40,19 +40,6 @@ class APIManager {
         case notFound
     }
     
-    public func checkErrorCode(_ errorCode: Int) -> APIError {
-        switch errorCode {
-        case 401:
-            return .unauthorized
-        case 403:
-            return .forbidden
-        case 404:
-            return .notFound
-        default:
-            return .unkownError
-        }
-    }
-    
     func downloadPosts(completionHandler: @escaping (_ posts: [PostData]?) -> Void) {
         Alamofire.request(APIManager.sharedInstance.BLOG_URL + POSTS, method: .get).responseData { response in
             
@@ -62,11 +49,9 @@ class APIManager {
                 if let posts: [PostData] = try? unbox(data: data!) {
                     completionHandler(posts)
                 }
-                break
+                debugPrint(response)
             case .failure:
-                let error = self.checkErrorCode(response.response!.statusCode)
-                print(error)
-                break
+                debugPrint(response)
             }
         }
     }
@@ -80,11 +65,9 @@ class APIManager {
                 if let marks: [MarkData] = try? unbox(data: data!) {
                     completionHandler(marks)
                 }
-                break
+                debugPrint(response)
             case .failure:
-                let error = self.checkErrorCode(response.response!.statusCode)
-                print(error)
-                break
+                debugPrint(response)
             }
         }
     }
@@ -98,11 +81,9 @@ class APIManager {
                 if let comments: [CommentData] = try? unbox(data: data!) {
                     completionHandler(comments)
                 }
-                break
+                debugPrint(response)
             case .failure:
-                let error = self.checkErrorCode(response.response!.statusCode)
-                print(error)
-                break
+                debugPrint(response)
             }
         }
     }
@@ -119,11 +100,9 @@ class APIManager {
                 if let comments: [CommentData] = try? unbox(data: data!) {
                     completionHandler(comments)
                 }
-                break
+                debugPrint(response)
             case .failure:
-                let error = self.checkErrorCode(response.response!.statusCode)
-                print(error)
-                break
+                debugPrint(response)
             }
         }
         
@@ -141,66 +120,96 @@ class APIManager {
                 if let marks: [MarkData] = try? unbox(data: data!) {
                     completionHandler(marks)
                 }
-                break
+                debugPrint(response)
             case .failure:
-                let error = self.checkErrorCode(response.response!.statusCode)
-                print(error)
-                break
+                debugPrint(response)
             }
         }
     }
     
-    func doLogin() {
+    func uploadComment(post: PostData?, comment: CommentData?, completionHandler: @escaping (_ comment: CommentData?) -> Void) {
         
-        let headers: HTTPHeaders = [
-            "Accept": "*/*"
-        ]
-        
-        let parameters: Parameters = [
-            "name": "dogma",
-            "password": "123123"
-        ]
-        
-        Alamofire.request(APIManager.sharedInstance.BLOG_URL + SECURITY + LOGIN, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseString { response in
-            
-            if let headerFields = response.response?.allHeaderFields as? [String: String], let URL = response.request?.url {
-                let cookies = HTTPCookie.cookies(withResponseHeaderFields: headerFields, for: URL)
-                UserDefaults.standard.set(String(describing: cookies), forKey: "session")
-            }
+        guard let comment = comment else {
+            print("CREATING COMMENT FOR UPLOAD FAILED")
+            return
         }
-    }
-    
-    
-    func doLogout() {
-        Alamofire.request(APIManager.sharedInstance.BLOG_URL + SECURITY + LOGOUT, method: .get).responseString { response in
-            switch response.result {
-            case .success:
-                UserDefaults.standard.removeObject(forKey: "session")
-                break
-            case .failure:
-                let error = self.checkErrorCode(response.response!.statusCode)
-                print(error)
-                break
-            }
+        
+        guard let post = post else {
+            print("CREATING POST FOR UPLOAD COMMENT FAILED")
+            return
         }
-    }
-
-    func uploadComment(post: PostData?, comment: CommentData?) {
         
         let headers: HTTPHeaders = [
             "Accept": UserDefaults.standard.string(forKey: "session")!
         ]
         
         let parameters: Parameters = [
-            "text": String(describing: comment!.text),
-            "idPost": String(describing: post!.postID),
+            "text": String(describing: comment.text),
+            "idPost": String(describing: post.postID),
             "idUser": "191"
         ]
         
         Alamofire.request(APIManager.sharedInstance.BLOG_URL + COMMENTS, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseString { response in
-            debugPrint(response)
+            
+            switch response.result {
+            case .success:
+                completionHandler(comment)
+                debugPrint(response)
+            case .failure:
+                debugPrint(response)
+            }
+            
         }
         
     }
+    
+    func doLogin(username: String, password: String) {
+        
+        let headers: HTTPHeaders = [
+            "Accept": "*/*"
+        ]
+        
+        let parameters: Parameters = [
+            "name": username,
+            "password": password
+        ]
+        
+        Alamofire.request(APIManager.sharedInstance.BLOG_URL + SECURITY + LOGIN, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseString { response in
+            
+            switch response.result {
+            case .success:
+                if let headerFields = response.response?.allHeaderFields as? [String: String], let URL = response.request?.url {
+                    let cookies = HTTPCookie.cookies(withResponseHeaderFields: headerFields, for: URL)
+                    UserDefaults.standard.set(String(describing: cookies), forKey: "session")
+                }
+                
+                UserDefaults.standard.set(username, forKey: "username")
+                UserDefaults.standard.set(password, forKey: "password")
+                debugPrint(response)
+                
+            case .failure:
+                debugPrint(response)
+            }
+            
+        }
+    }
+    
+    
+    func doLogout() {
+        Alamofire.request(APIManager.sharedInstance.BLOG_URL + SECURITY + LOGOUT, method: .get).responseString { response in
+            
+            switch response.result {
+            case .success:
+                UserDefaults.standard.removeObject(forKey: "session")
+                UserDefaults.standard.removeObject(forKey: "username")
+                UserDefaults.standard.removeObject(forKey: "password")
+                debugPrint(response)
+            case .failure:
+                debugPrint(response)
+            }
+
+        }
+    }
+
     
 }

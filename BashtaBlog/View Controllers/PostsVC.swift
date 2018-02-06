@@ -15,7 +15,7 @@ class PostsVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var authorizeButton: UIButton!
     
-    private var presenter = PostPresenter()
+    private var postPresenter = PostPresenter()
     private var authorizePresenter = AuthorizePresener()
     
     var posts = [PostData]()
@@ -25,11 +25,10 @@ class PostsVC: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-        presenter.attachView(view: self)
-        authorizePresenter.attachView(view: self)
+        postPresenter.attachView(view: self)
         
         DispatchQueue.main.async {
-            self.presenter.getPosts()
+            self.postPresenter.getPosts()
         }
         
     }
@@ -49,19 +48,7 @@ class PostsVC: UIViewController {
     }
     
     @IBAction func logoutUser(_ sender: Any) {
-        logoutUser()
-    }
-    
-}
-
-extension PostsVC: AuthorizeView {
-    
-    func loginUser() {
-        authorizePresenter.loginUser()
-    }
-    
-    func logoutUser() {
-        authorizePresenter.logoutUser()
+        APIManager.sharedInstance.doLogout()
     }
     
 }
@@ -76,7 +63,7 @@ extension PostsVC: PostsView {
     }
     
     func getPosts() {
-        presenter.getPosts()
+        postPresenter.getPosts()
     }
     
 }

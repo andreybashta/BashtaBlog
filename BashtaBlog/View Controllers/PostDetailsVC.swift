@@ -15,7 +15,6 @@ class PostDetailsVC: UIViewController {
     @IBOutlet weak var postContentView: PostContentView!
     @IBOutlet weak var addCommentView: AddCommentView!
     
-    
     var post: PostData?
     var marks = [MarkData]()
     var comments = [CommentData]()
@@ -27,7 +26,11 @@ class PostDetailsVC: UIViewController {
 
         tableView.delegate = self
         tableView.dataSource = self
+        addCommentView.commentTextField.delegate = self
         presenter.attachView(view: self)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         DispatchQueue.main.async {
             self.presenter.getCommentsByPostID(post: self.post!)
@@ -40,28 +43,78 @@ class PostDetailsVC: UIViewController {
     
     @IBAction func addComment(_ sender: Any) {
         
-        let comment = CommentData(commentID: 0, text: addCommentView.commentTextField.text!, datePublic: "2018", author: "dogma")
-        comments.append(comment)
-        tableView.reloadData()
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yyyy"
+        let dateResult = formatter.string(from: date)
+
+        let author = UserDefaults.standard.string(forKey: "username")
+        
+        let comment = CommentData(commentID: 0, text: addCommentView.commentTextField.text!, datePublic: dateResult, author: author!)
+
         setComment(post: self.post, comment: comment)
         
     }
     
 }
 
+// Keyboard extension
+extension PostDetailsVC {
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0 && (comments.count > 1) {
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y != 0 {
+                self.view.frame.origin.y += keyboardSize.height
+            }
+        }
+    }
+}
+
+extension PostDetailsVC: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        addCommentView.commentTextField.resignFirstResponder()
+        return true
+    }
+    
+}
+
 extension PostDetailsVC: PostsDetailsView {
     
+    func appendComment(comment: CommentData?) {
+        guard let comment = comment else {
+            print("COMMENT DIDN'T ADDED TO ARRAY")
+            return
+        }
+        self.comments.append(comment)
+        tableView.reloadData()
+    }
+
     func setComment(post: PostData?, comment: CommentData?) {
         presenter.setComment(post: post, comment: comment)
     }
     
     func appendMarks(marks: [MarkData]?) {
-        guard let marks = marks else { return }
+        guard let marks = marks else {
+            print("MARKS DIDN'T ADDED TO ARRAY")
+            return
+        }
         
         self.marks = marks
         
-        postContentView.setScrollViewItems(marks: marks)
-        postContentView.setScrollSize(marks: marks)
+        if marks.count != 0 {
+            postContentView.marksScrollView.isHidden = false
+            postContentView.setScrollViewItems(marks: marks)
+            postContentView.setScrollSize(marks: marks)
+        }
+        
     }
     
     func getMarksByPostID(post: PostData?) {
@@ -70,7 +123,11 @@ extension PostDetailsVC: PostsDetailsView {
     
 
     func appendComments(comments: [CommentData]?) {
-        self.comments = comments!
+        guard let comments = comments else {
+            print("COMMENTS DIDN'T ADDED TO ARRAY")
+            return
+        }
+        self.comments = comments
         tableView.reloadData()
     }
     
