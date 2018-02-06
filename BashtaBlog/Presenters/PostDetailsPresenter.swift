@@ -34,6 +34,7 @@ class PostDetailsPresenter {
     
     func setComment(post: PostData?, comment: CommentData?) {
         APIManager.sharedInstance.uploadComment(post: post, comment: comment)
+        //TODO add completionHandler and comments refresh
     }
     
 }

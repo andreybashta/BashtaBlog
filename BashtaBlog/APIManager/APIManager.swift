@@ -198,6 +198,7 @@ class APIManager {
         ]
         
         Alamofire.request(APIManager.sharedInstance.BLOG_URL + COMMENTS, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseString { response in
+            //TODO add closure
             debugPrint(response)
         }
         

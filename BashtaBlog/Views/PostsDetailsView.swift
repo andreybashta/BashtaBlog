@@ -17,5 +17,5 @@ protocol PostsDetailsView {
     func getCommentsByPostID(post: PostData?)
     
     func setComment(post: PostData?, comment: CommentData?)
-
+    
 }
