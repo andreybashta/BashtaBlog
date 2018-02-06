@@ -129,13 +129,8 @@ class APIManager {
     
     func uploadComment(post: PostData?, comment: CommentData?, completionHandler: @escaping (_ comment: CommentData?) -> Void) {
         
-        guard let comment = comment else {
+        guard let comment = comment, let post = post else {
             print("CREATING COMMENT FOR UPLOAD FAILED")
-            return
-        }
-        
-        guard let post = post else {
-            print("CREATING POST FOR UPLOAD COMMENT FAILED")
             return
         }
         

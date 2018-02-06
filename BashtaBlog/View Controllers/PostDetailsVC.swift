@@ -21,44 +21,39 @@ class PostDetailsVC: UIViewController {
     
     private var presenter = PostDetailsPresenter()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        tableView.delegate = self
-        tableView.dataSource = self
-        addCommentView.commentTextField.delegate = self
-        presenter.attachView(view: self)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        
-        DispatchQueue.main.async {
-            self.presenter.getCommentsByPostID(post: self.post!)
-            self.presenter.getMarksByPostID(post: self.post!)
-        }
-
-        postContentView.ConfigureCell(post: post!)
-        
-    }
-    
-    @IBAction func addComment(_ sender: Any) {
-        
+    private var currentDate: String {
         let date = Date()
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyyy"
-        let dateResult = formatter.string(from: date)
+        return formatter.string(from: date)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
+        tableView.dataSource = self
+        addCommentView.commentTextField.delegate = self
+        
+        presenter.attachView(view: self)
+        presenter.loadData(forPost: post)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+
+        postContentView.configureCell(post: post!)
+    }
+    
+    @IBAction func addComment(_ sender: Any) {
         let author = UserDefaults.standard.string(forKey: "username")
         
-        let comment = CommentData(commentID: 0, text: addCommentView.commentTextField.text!, datePublic: dateResult, author: author!)
+        let comment = CommentData(commentID: 0, text: addCommentView.commentTextField.text!, datePublic: currentDate, author: author!)
 
-        setComment(post: self.post, comment: comment)
-        
+        presenter.addComment(comment)
     }
     
 }
 
-// Keyboard extension
+// MARK: Keyboard extension
 extension PostDetailsVC {
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
@@ -96,10 +91,6 @@ extension PostDetailsVC: PostsDetailsView {
         self.comments.append(comment)
         tableView.reloadData()
     }
-
-    func setComment(post: PostData?, comment: CommentData?) {
-        presenter.setComment(post: post, comment: comment)
-    }
     
     func appendMarks(marks: [MarkData]?) {
         guard let marks = marks else {
@@ -116,28 +107,16 @@ extension PostDetailsVC: PostsDetailsView {
         }
         
     }
-    
-    func getMarksByPostID(post: PostData?) {
-        presenter.getMarksByPostID(post: self.post)
-    }
-    
 
     func appendComments(comments: [CommentData]?) {
         guard let comments = comments else {
             print("COMMENTS DIDN'T ADDED TO ARRAY")
             return
         }
+        
         self.comments = comments
         tableView.reloadData()
     }
-    
-    func getCommentsByPostID(post: PostData?) {
-        presenter.getCommentsByPostID(post: self.post)
-    }
-    
-}
-
-extension PostDetailsVC: UITableViewDelegate {
     
 }
 
