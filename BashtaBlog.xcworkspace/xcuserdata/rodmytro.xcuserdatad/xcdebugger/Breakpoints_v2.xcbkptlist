@@ -58,12 +58,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BashtaBlog/Presenters/PostDetailsPresenter.swift"
-            timestampString = "539348169.28605"
+            timestampString = "539640461.672578"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
-            landmarkName = "getMarksByPostID(post:)"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "getMarksByPostID()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

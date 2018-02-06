@@ -16,21 +16,17 @@ class PostsVC: UIViewController {
     @IBOutlet weak var authorizeButton: UIButton!
     
     private var postPresenter = PostPresenter()
-    private var authorizePresenter = AuthorizePresener()
     
-    var posts = [PostData]()
+    private var posts = [PostData]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.delegate = self
         tableView.dataSource = self
+        
         postPresenter.attachView(view: self)
-        
-        DispatchQueue.main.async {
-            self.postPresenter.getPosts()
-        }
-        
+        postPresenter.loadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -48,7 +44,7 @@ class PostsVC: UIViewController {
     }
     
     @IBAction func logoutUser(_ sender: Any) {
-        APIManager.sharedInstance.doLogout()
+        postPresenter.logout()
     }
     
 }
@@ -56,14 +52,11 @@ class PostsVC: UIViewController {
 extension PostsVC: PostsView {
     
     func appendPosts(posts: [PostData]?) {
-        for post in posts! {
-            self.posts.append(post)
-        }
+        guard let posts = posts else { return }
+        
+        self.posts = posts
+        
         tableView.reloadData()
-    }
-    
-    func getPosts() {
-        postPresenter.getPosts()
     }
     
 }

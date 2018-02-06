@@ -20,7 +20,15 @@ class PostPresenter {
         postView = nil
     }
     
-    func getPosts() {
+    public func loadData() {
+        getPosts()
+    }
+    
+    public func logout() {
+        APIManager.sharedInstance.doLogout()
+    }
+    
+    private func getPosts() {
         APIManager.sharedInstance.downloadPosts(completionHandler: { (posts) in
             self.postView?.appendPosts(posts: posts)
         })
